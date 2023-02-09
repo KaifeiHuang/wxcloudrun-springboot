@@ -15,4 +15,11 @@ public class SumRequest {
     private Integer firstNum;
     private Integer secondNum;
 
+    @Override
+    public String toString() {
+        return "SumRequest{" +
+                "firstNum=" + firstNum +
+                ", secondNum=" + secondNum +
+                '}';
+    }
 }

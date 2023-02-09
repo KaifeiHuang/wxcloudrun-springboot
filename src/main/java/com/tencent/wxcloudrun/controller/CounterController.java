@@ -1,6 +1,7 @@
 package com.tencent.wxcloudrun.controller;
 
 import com.tencent.wxcloudrun.dto.SumRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.tencent.wxcloudrun.config.ApiResponse;
@@ -20,6 +21,7 @@ import java.util.List;
 /**
  * counter控制器
  */
+@Slf4j
 @RestController
 
 public class CounterController {
@@ -89,7 +91,10 @@ public class CounterController {
    */
   @PostMapping(value = "/api/sum")
   ApiResponse create(@RequestBody SumRequest request) {
-    return ApiResponse.ok(request.getFirstNum() + request.getSecondNum());
+    log.info("input request:{}",request );
+    int res = request.getFirstNum() + request.getSecondNum();
+    log.info("sum res={}", res);
+    return ApiResponse.ok(res);
   }
 
   
