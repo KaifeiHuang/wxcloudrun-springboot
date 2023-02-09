@@ -57,7 +57,7 @@ public class CounterController {
    * @param request {@link CounterRequest}
    * @return API response json
    */
-  @PostMapping(value = "/api/count")
+  @PostMapping(value = "/api/addcount")
   ApiResponse create(@RequestBody CounterRequest request) {
     logger.info("/api/count post request, action: {}", request.getAction());
 
