@@ -1,5 +1,6 @@
 package com.tencent.wxcloudrun.controller;
 
+import com.tencent.wxcloudrun.dto.SumRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.tencent.wxcloudrun.config.ApiResponse;
@@ -79,5 +80,17 @@ public class CounterController {
       return ApiResponse.error("参数action错误");
     }
   }
+
+  /**
+   * 两数求和
+   *
+   * @param request
+   * @return
+   */
+  @PostMapping(value = "/api/sum")
+  ApiResponse create(@RequestBody SumRequest request) {
+    return ApiResponse.ok(request.getFirstNum() + request.getSecondNum());
+  }
+
   
 }
