@@ -13,4 +13,6 @@ public interface CountersMapper {
   void upsertCount(Counter counter);
 
   void clearCount(@Param("id") Integer id);
+
+  void insert(@Param("val") Integer val);
 }

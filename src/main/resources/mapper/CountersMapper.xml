@@ -28,4 +28,9 @@
         ON DUPLICATE KEY UPDATE count=#{count}
     </update>
 
+    <insert id="insert" parameterType="java.lang.Integer">
+        INSERT INTO `Counters`(`count`)
+        VALUES (#{val})
+    </insert>
+
 </mapper>

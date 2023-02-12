@@ -78,6 +78,9 @@ public class CounterController {
       }
       counterService.clearCount(1);
       return ApiResponse.ok(0);
+    } else if (request.getAction().equals("addr")) {
+      counterService.insert(1);
+      return ApiResponse.ok(0);
     } else {
       return ApiResponse.error("参数action错误");
     }

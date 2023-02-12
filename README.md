@@ -117,6 +117,11 @@ curl -X POST -H 'content-type: application/json' -d '{"action": "inc"}' https://
 以上三个变量的值请按实际情况填写。如果使用云托管内MySQL，可以在控制台MySQL页面获取相关信息。
 
 
+## 压测
+可以使用jmeter进行压测
+ramp-up period是指告诉Jmeter需要花费多久的时间启动全部的线程。
+
+
 ## License
 
 [MIT](./LICENSE)
