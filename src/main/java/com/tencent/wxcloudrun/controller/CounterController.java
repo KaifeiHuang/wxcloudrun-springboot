@@ -1,6 +1,8 @@
 package com.tencent.wxcloudrun.controller;
 
 import com.tencent.wxcloudrun.dto.SumRequest;
+import io.github.resilience4j.timelimiter.TimeLimiter;
+import io.github.resilience4j.timelimiter.TimeLimiterConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,11 +14,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
 
 /**
  * counter控制器
@@ -34,6 +41,22 @@ public class CounterController {
     this.logger = LoggerFactory.getLogger(CounterController.class);
   }
 
+
+  private TimeLimiter ourTimeLimiter = TimeLimiter.of(TimeLimiterConfig.custom()
+          .timeoutDuration(Duration.ofMillis(500)).build());
+
+  @GetMapping("/api/test")
+  public Callable<String> getWithResilience4jTimeLimiter() {
+    return TimeLimiter.decorateFutureSupplier(ourTimeLimiter, () ->
+            CompletableFuture.supplyAsync(() -> {
+              try {
+                TimeUnit.SECONDS.sleep(5);
+              } catch (InterruptedException e) {
+                e.printStackTrace();
+              }
+              return "ssss";
+            }));
+  }
 
   /**
    * 获取当前计数
