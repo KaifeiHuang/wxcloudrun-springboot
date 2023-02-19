@@ -45,6 +45,13 @@ public class CounterController {
   private TimeLimiter ourTimeLimiter = TimeLimiter.of(TimeLimiterConfig.custom()
           .timeoutDuration(Duration.ofMillis(500)).build());
 
+
+  @GetMapping("/api/greeting")
+  public String greet() {
+    log.info("=== greet");
+    return "welcome to cloudrun.!!!!";
+  }
+
   @GetMapping("/api/test")
   public Callable<String> getWithResilience4jTimeLimiter() {
     return TimeLimiter.decorateFutureSupplier(ourTimeLimiter, () ->

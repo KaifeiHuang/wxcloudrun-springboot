@@ -1,5 +1,5 @@
 server:
-  port: 80
+  port: 8888
 
 #  ${MYSQL_DATABASE:springboot_demo}  MYSQL_DATABASE环境变量不存在时，使用默认值springboot_demo
 
